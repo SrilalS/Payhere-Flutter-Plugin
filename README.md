@@ -2,11 +2,11 @@
 
 A Plugin for Payhere SDK for Flutter.
 
-![ScreenShot](https://raw.githubusercontent.com/SrilalS/U-Music/master/Docs/img/1.png?raw=true)
+![ScreenShot](https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/blob/master/Docs/img/1.png?raw=true)
 
-![ScreenShot](https://raw.githubusercontent.com/SrilalS/U-Music/master/Docs/img/2.png?raw=true)
+![ScreenShot](https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/blob/master/Docs/img/1.png?raw=true)
 
-![ScreenShot](https://raw.githubusercontent.com/SrilalS/U-Music/master/Docs/img/3.png?raw=true)
+![ScreenShot](https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/blob/master/Docs/img/1.png?raw=true)
 
 ## Usage
 ### Installing
