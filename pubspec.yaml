@@ -1,6 +1,6 @@
 name: payhere
-description: Payhere SDK Plugin for Flutter (Android Only Yet)
-version: 0.5.2
+description: Payhere SDK Plugin for Flutter. Supports Payhere OneTime Payaments and Android.
+version: 0.5.25
 repository: https://github.com/SrilalS/Payhere-Flutter-Plugin
 
 environment:
