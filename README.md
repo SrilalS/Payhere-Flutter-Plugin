@@ -10,9 +10,9 @@ A Plugin for Payhere SDK for Flutter.
 
 
 <p>
-    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/1.png?raw=true" width="180px" height="auto" hspace="20"/>
-    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/2.png?raw=true" width="180px" height="auto" hspace="20"/>
-    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/3.png?raw=true" width="180px" height="auto" hspace="20"/>
+    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/1.png?raw=true" width="190px" height="auto"/>
+    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/2.png?raw=true" width="190px" height="auto"/>
+    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/3.png?raw=true" width="190px" height="auto"/>
 </p>
 
 
