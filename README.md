@@ -1,6 +1,8 @@
 # Payhere Flutter Plugin
 
 A Plugin for Payhere SDK for Flutter.
+
+
 ![Build Version](https://img.shields.io/badge/V-0.5.1-brightgreen)
 ![Build](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![Build SDK](https://img.shields.io/badge/FlutterChannel-Stable-blue)
@@ -22,11 +24,13 @@ Under dependencies in your pubspec.yaml file:
 ## Payment Status/Result
 
 **Result will be a JSON in String format. Example  {STATUS : ERROR, CODE: -1}**
+
 | Code| Reason|
 |--|--|
 | 1|  Success|
 | -1|  Error|
 | 0|  Canceled|
+
 **Error (-1) and Canceled (0) are Same in Behavior.**
 
 ## Dev STATUS
