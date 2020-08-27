@@ -14,8 +14,8 @@ class _MyAppState extends State<MyApp> {
   String response = "NOT YET";
 
   Payhere payhere = new Payhere(
-      "1213586",
-      "4pH81nUGhXF8hivSd4bAgc4ZGRjX4m7Rh8MOFpE8EZTL",
+      "Merchant ID",
+      "Merchant Secret",
       "LKR",
       250,
       "12566548",
