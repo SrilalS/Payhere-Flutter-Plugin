@@ -1,3 +1,11 @@
+## 0.5.26
+**Changes**
+* changed the Changelog and Readme file 👓
+
+## 0.5.25
+**Changes**
+* Minor Bug Fix 👓
+
 ## 0.5.2
 **Changes**
 * changed the Readme file 👓

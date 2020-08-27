@@ -3,7 +3,7 @@
 A Plugin for Payhere SDK for Flutter.
 
 
-![Build Version](https://img.shields.io/badge/V-0.5.1-brightgreen)
+![Build Version](https://img.shields.io/badge/V-0.5.26-brightgreen)
 ![Build](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![Build SDK](https://img.shields.io/badge/FlutterChannel-Stable-blue)
 ![Payheresdk](https://img.shields.io/badge/PayhereSDK-2.0.24-brightgreen)
@@ -20,7 +20,7 @@ A Plugin for Payhere SDK for Flutter.
 ### Installing
 Under dependencies in your pubspec.yaml file:
 
-    payhere: ^0.5.1
+    payhere: ^0.5.26
 ## Payment Status/Result
 
 **Result will be a JSON in String format. Example  {STATUS : ERROR, CODE: -1}**
