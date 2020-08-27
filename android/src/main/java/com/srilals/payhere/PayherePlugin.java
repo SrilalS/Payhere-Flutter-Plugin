@@ -1,4 +1,4 @@
-package com.srilals.payhere.payhere;
+package com.srilals.payhere;
 
 import android.util.Log;
 
