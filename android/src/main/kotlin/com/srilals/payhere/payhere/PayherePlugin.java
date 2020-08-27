@@ -14,7 +14,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
- * PayherePlugin
+ * PayherePlugin for Flutter SDK
  */
 public class PayherePlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
 

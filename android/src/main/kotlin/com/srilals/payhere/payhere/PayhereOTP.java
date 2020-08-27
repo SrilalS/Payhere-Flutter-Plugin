@@ -3,12 +3,8 @@ package com.srilals.payhere.payhere;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.google.gson.Gson;
-
 import java.util.HashMap;
-import java.util.Map;
 
-import io.flutter.Log;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.ActivityResultListener;
@@ -25,8 +21,6 @@ public class PayhereOTP implements ActivityResultListener {
     private final Activity activity;
     private final MethodChannel channel;
     private Result pendingResult;
-    private Map<String, Object> pendingReply;
-    final Gson gson = new Gson();
 
     public PayhereOTP(Activity activity, MethodChannel channel) {
         this.activity = activity;
@@ -68,36 +62,33 @@ public class PayhereOTP implements ActivityResultListener {
         if (MODE.equals("PRODUCTION")){
             PHConfigs.setBaseUrl(PHConfigs.LIVE_URL);
         }
-        activity.startActivityForResult(intent, 456); //unique request ID like private final static int PAYHERE_REQUEST = 11010;
+        activity.startActivityForResult(intent, 1100110011);
     }
 
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         HashMap<String, Object> map = new HashMap<>();
-        if (requestCode == 456 && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) {
+        if (requestCode == 1100110011 && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) {
             PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT);
 
             if (response.isSuccess()){
-                map.put("status","SUCCESS");
-                map.put("code","1");
+                map.put("STATUS","SUCCESS");
+                map.put("CODE","1");
                 pendingResult.success(map);
-                Log.d("TAG","SUCCESS");
                 channel.invokeMethod("Result",map);
             } else {
-                map.put("status","ERROR");
-                map.put("code","0");
-                Log.d("TAG","{ERROR}");
+                map.put("STATUS","ERROR");
+                map.put("CODE","-1");
                 pendingResult.success(map);
                 channel.invokeMethod("Result",map);
 
             }
             return true;
         } else {
-            map.put("status","CANCELED");
-            map.put("code","0");
+            map.put("STATUS","CANCELED");
+            map.put("CODE","0");
             pendingResult.success(map);
-            Log.d("TAG","{USER CANCELED}");
             channel.invokeMethod("Result",map);
             return true;
         }
