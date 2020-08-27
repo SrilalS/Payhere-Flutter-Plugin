@@ -15,7 +15,7 @@ class _MyAppState extends State<MyApp> {
 
   Payhere payhere = new Payhere(
       "Merchant ID",
-      "Merchant Secret",
+      "Secret Merchant Code",
       "LKR",
       250,
       "12566548",
