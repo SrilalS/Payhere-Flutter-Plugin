@@ -6,7 +6,7 @@ A Plugin for Payhere SDK for Flutter.
 ![Build Version](https://img.shields.io/badge/V-0.5.1-brightgreen)
 ![Build](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![Build SDK](https://img.shields.io/badge/FlutterChannel-Stable-blue)
-![Payhere SDK Version](https://img.shields.io/badge/V-2.0.24-brightgreen)
+![Payheresdk](https://img.shields.io/badge/PayhereSDK-2.0.24-brightgreen)
 
 
 <p>
