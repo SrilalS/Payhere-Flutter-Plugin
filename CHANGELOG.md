@@ -1,3 +1,6 @@
-## 0.0.1
+## 0.5.1
 
-* TODO: Describe initial release.
+**Changes**
+* initial release of the Payhere Flutter Plugin 💡
+* added support for OneTime Payments for Android ✔
+
