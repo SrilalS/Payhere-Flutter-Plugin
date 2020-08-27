@@ -7,9 +7,11 @@ A Plugin for Payhere SDK for Flutter.
 ![Payhere SDK Version](https://img.shields.io/badge/V-2.0.24-brightgreen)
 
 
-![ScreenShot](https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/1.png?raw=true)
-![ScreenShot](https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/1.png?raw=true)
-![ScreenShot](https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/1.png?raw=true)
+<p>
+    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/1.png?raw=true" width="180px" height="auto" hspace="20"/>
+    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/2.png?raw=true" width="180px" height="auto" hspace="20"/>
+    <img src="https://raw.githubusercontent.com/SrilalS/Payhere-Flutter-Plugin/master/Docs/img/3.png?raw=true" width="180px" height="auto" hspace="20"/>
+</p>
 
 
 ## Usage
