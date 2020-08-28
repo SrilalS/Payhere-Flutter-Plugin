@@ -1,3 +1,7 @@
+## 0.6.1
+**Changes**
+* small bug fix
+
 ## 0.6.0
 **Changes**
 * improved the payment methods. 👓

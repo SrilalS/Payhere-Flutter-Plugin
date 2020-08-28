@@ -87,6 +87,7 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
 
             String MODE = call.argument("MODE").toString();
 
+            //payhereOTP.recurringPayment(result);
             payhereOTP.recurringPayment(result, MID, MSecret, Currency, Amount, OrderID, ItemDesc, CM1, CM2, FName, LName, Email, Phone, Address, City, Country, Recurrence, Duration, StartUpFee, MODE);
         } else {
             result.notImplemented();

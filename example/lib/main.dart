@@ -71,8 +71,8 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               RaisedButton(
                 onPressed: () async {
-                  String reps = await payhere.makeOneTimePayment(oneTimePayment);
-                  //String reps = await payhere.makeRecurringPayment(recurringPayment);
+                  //String reps = await payhere.makeOneTimePayment(oneTimePayment);
+                  String reps = await payhere.makeRecurringPayment(recurringPayment);
                   setState(() {
                     response = reps;
                   });
