@@ -1,3 +1,8 @@
+## 0.6.6
+**Changes**
+* improved the payment methods. 👓
+* added recurring payment. not tested yet!
+
 ## 0.5.26
 **Changes**
 * changed the Changelog and Readme file 👓
