@@ -27,7 +27,7 @@ Under dependencies in your pubspec.yaml file:
 
 | Code| Reason|
 |--|--|
-| 1|  Success|
+| 2|  Success|
 | -1|  Error|
 | 0|  Canceled|
 

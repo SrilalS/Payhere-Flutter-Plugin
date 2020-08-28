@@ -13,9 +13,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String response = "NOT YET";
 
-  Payhere payhere = new Payhere(
-      "Merchant ID",
-      "Secret Merchant Code",
+  OneTimePayment oneTimePayment = new OneTimePayment(
+      "1213586",
+      "4pH81nUGhXF8hivSd4bAgc4ZGRjX4m7Rh8MOFpE8EZTL",
       "LKR",
       250,
       "12566548",
@@ -34,6 +34,30 @@ class _MyAppState extends State<MyApp> {
       "Sri Lanka",
       2);
 
+        RecurringPayment recurringPayment = new RecurringPayment(
+      "1213586",
+      "4pH81nUGhXF8hivSd4bAgc4ZGRjX4m7Rh8MOFpE8EZTL",
+      "LKR",
+      250,
+      "12566548",
+      "itemDesc",
+      "cM1",
+      "cM2",
+      "fName",
+      "lName",
+      "email",
+      "+94771234567",
+      "address",
+      "Colombo",
+      "Sri Lanka",
+      "1 Month",
+      "Forever",
+      2);
+
+
+
+  Payhere payhere = new Payhere();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,7 +71,8 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               RaisedButton(
                 onPressed: () async {
-                  String reps = await payhere.makePayment();
+                  //String reps = await payhere.makeOneTimePayment(oneTimePayment);
+                  String reps = await payhere.makeRecurringPayment(recurringPayment);
                   setState(() {
                     response = reps;
                   });
