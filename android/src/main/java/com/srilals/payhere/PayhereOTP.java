@@ -2,10 +2,10 @@ package com.srilals.payhere;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.HashMap;
 
+import io.flutter.Log;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.ActivityResultListener;
@@ -114,6 +114,7 @@ public class PayhereOTP implements ActivityResultListener {
                 pendingResult.success(map); //Puts Map to Result OBJ
                 channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
             } else { //If Payment Error Occurs
+                Log.d("TAG",response.toString());
                 map.put("STATUS","ERROR"); //Sets Status to Error
                 map.put("CODE","-1"); //Sets Error Code
                 pendingResult.success(map); //Puts Map to Result OBJ
