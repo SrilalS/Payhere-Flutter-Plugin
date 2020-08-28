@@ -1,3 +1,7 @@
+## 0.6.11
+**Changes**
+* small bug fix #2
+
 ## 0.6.1
 **Changes**
 * small bug fix

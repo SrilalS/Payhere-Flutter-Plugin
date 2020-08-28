@@ -67,8 +67,8 @@ public class PayhereOTP implements ActivityResultListener {
         this.pendingResult = result;
         InitRequest req = new InitRequest();
 
-        req.setMerchantId("1213586");       // Your Merchant ID
-        req.setMerchantSecret("4pH81nUGhXF8hivSd4bAgc4ZGRjX4m7Rh8MOFpE8EZTL"); // Your Merchant Secret (Add your app at Settings > Domains & Credentials, to get this)
+        req.setMerchantId("XXXX");       // Your Merchant ID
+        req.setMerchantSecret("XXXX"); // Your Merchant Secret (Add your app at Settings > Domains & Credentials, to get this)
         req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
         req.setAmount(120.00);              // Final Amount to be charged
         req.setRecurrence("1 Month");       // Recurrence of the Subscription
