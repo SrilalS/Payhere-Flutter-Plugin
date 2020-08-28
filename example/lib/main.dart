@@ -14,8 +14,8 @@ class _MyAppState extends State<MyApp> {
   String response = "NOT YET";
 
   OneTimePayment oneTimePayment = new OneTimePayment(
-      "1213586",
-      "4pH81nUGhXF8hivSd4bAgc4ZGRjX4m7Rh8MOFpE8EZTL",
+      "Merchant ID",
+      "Merchant Secret",
       "LKR",
       250,
       "12566548",
@@ -35,8 +35,8 @@ class _MyAppState extends State<MyApp> {
       2);
 
         RecurringPayment recurringPayment = new RecurringPayment(
-      "1213586",
-      "4pH81nUGhXF8hivSd4bAgc4ZGRjX4m7Rh8MOFpE8EZTL",
+      "Merchant ID",
+      "Merchant Secret",
       "LKR",
       120,
       "o6ae978a1",
@@ -71,8 +71,8 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               RaisedButton(
                 onPressed: () async {
-                  //String reps = await payhere.makeOneTimePayment(oneTimePayment);
-                  String reps = await payhere.makeRecurringPayment(recurringPayment);
+                  String reps = await payhere.makeOneTimePayment(oneTimePayment);
+                  //String reps = await payhere.makeRecurringPayment(recurringPayment);
                   setState(() {
                     response = reps;
                   });
