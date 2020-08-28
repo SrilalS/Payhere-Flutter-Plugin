@@ -58,7 +58,6 @@ class OneTimePayment {
     this._mode = "PRODUCTION";
   }
 
-
   OneTimePayment(
     String merchantID,
     String merchantSecret,

@@ -1,4 +1,4 @@
-## 0.6.6
+## 0.6.0
 **Changes**
 * improved the payment methods. 👓
 * added recurring payment. not tested yet!
