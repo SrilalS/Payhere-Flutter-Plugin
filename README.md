@@ -17,6 +17,7 @@ A Plugin for Payhere SDK for Flutter.
 
 
 ## Usage
+[Get it From Pub.dev](https://pub.dev/packages/payhere)
 ### Installing
 Under dependencies in your pubspec.yaml file:
 
