@@ -34,19 +34,13 @@ But, in your `AndroidManifest.xml`, under `application`, add this `tools:replace
 
 Example: 
 
-`<manifest xmlns:android="http://schemas.android.com/apk/res/android" `
-
-  ` xmlns:tools="http://schemas.android.com/tools"  `
-
- ` package="YOUR PACKAGE NAME WILL AUTOMATICALLY BE HERE."> `
- 
-` <application  android:name="io.flutter.app.FlutterApplication" `
-
-`  android:label="YOUR ANDROID LAUNCHER LABEL" `
-
-`  android:icon="@mipmap/ic_launcher" `
-
-`  tools:replace="android:label">`
+`<manifest xmlns:android="http://schemas.android.com/apk/res/android" `  
+` xmlns:tools="http://schemas.android.com/tools"  `  
+` package="YOUR PACKAGE NAME WILL AUTOMATICALLY BE HERE."> `  
+` <application  android:name="io.flutter.app.FlutterApplication" `  
+`  android:label="YOUR ANDROID LAUNCHER LABEL" `  
+`  android:icon="@mipmap/ic_launcher" `  
+`  tools:replace="android:label">`  
 
 ### First initialize a new **Payhere** object,
 `Payhere payhere = new  Payhere(); `
