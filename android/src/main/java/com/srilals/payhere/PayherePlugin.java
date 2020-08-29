@@ -53,9 +53,28 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
             String Address = call.argument("Address").toString();
             String City = call.argument("City").toString();
             String Country = call.argument("Country").toString();
-            String DeliveryAddress = call.argument("DeliveryAddress").toString();
-            String DeliveryCity = call.argument("DeliveryCity").toString();
-            String DeliveryCountry = call.argument("DeliveryCountry").toString();
+            //Nullables
+            String DeliveryAddressIN = call.argument("DeliveryAddress");
+            String DeliveryCityIN = call.argument("DeliveryCity");
+            String DeliveryCountryIN = call.argument("DeliveryCountry");
+
+            String DeliveryAddress = null;
+            String DeliveryCity = null;
+            String DeliveryCountry = null;
+
+            if (DeliveryAddressIN != null) {
+                DeliveryAddress = DeliveryAddressIN.toString();
+            }
+
+            if (DeliveryCityIN != null) {
+                DeliveryCity = DeliveryCityIN.toString();
+            }
+
+            if (DeliveryCountryIN != null) {
+                DeliveryCountry = DeliveryCountryIN.toString();
+            }
+
+            //
             int Quantity = Integer.parseInt(call.argument("Quantity").toString());
             String MODE = call.argument("MODE").toString();
 

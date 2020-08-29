@@ -1,3 +1,9 @@
+## 0.7.25
+**Changes**
+* Completed the Documentaion for OneTimePayments
+* Made Core changes
+* increased safely
+
 ## 0.6.11
 **Changes**
 * small bug fix #2
@@ -8,7 +14,7 @@
 
 ## 0.6.0
 **Changes**
-* improved the payment methods. 👓
+* improved the payment methods. 
 * added recurring payment. not tested yet!
 
 ## 0.5.26

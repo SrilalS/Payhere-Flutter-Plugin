@@ -14,7 +14,6 @@ import lk.payhere.androidsdk.PHConstants;
 import lk.payhere.androidsdk.PHMainActivity;
 import lk.payhere.androidsdk.PHResponse;
 import lk.payhere.androidsdk.model.InitRequest;
-import lk.payhere.androidsdk.model.Item;
 import lk.payhere.androidsdk.model.StatusResponse;
 
 public class PayhereOTP implements ActivityResultListener {
@@ -48,10 +47,21 @@ public class PayhereOTP implements ActivityResultListener {
         IR.getCustomer().getAddress().setCity(City);
         IR.getCustomer().getAddress().setCountry(Country);
         //OPT
-        IR.getCustomer().getDeliveryAddress().setAddress(DeliveryAddress);
-        IR.getCustomer().getDeliveryAddress().setCity(DeliveryCity);
-        IR.getCustomer().getDeliveryAddress().setCountry(DeliveryCountry);
-        IR.getItems().add(new Item(null, ItemDesc, Quantity, Amount));
+        if (DeliveryAddress != null){
+            IR.getCustomer().getDeliveryAddress().setAddress(DeliveryAddress);
+        }
+
+        if (DeliveryCity != null){
+            IR.getCustomer().getDeliveryAddress().setCity(DeliveryCity);
+        }
+
+        if (DeliveryCountry != null){
+            IR.getCustomer().getDeliveryAddress().setCountry(DeliveryCountry);
+        }
+
+
+        //
+        //IR.getItems().add(new Item(null, ItemDesc, Quantity, Amount));
 
         Intent intent = new Intent(activity, PHMainActivity.class);
         intent.putExtra(PHConstants.INTENT_EXTRA_DATA, IR);
@@ -85,7 +95,7 @@ public class PayhereOTP implements ActivityResultListener {
         req.getCustomer().getAddress().setCountry("Sri Lanka");
         req.setItemsDescription("PRO Plan Subscription");
 
-// Optional Param
+        // Optional Param
         req.setStartupFee(0);               // +/- Adjustment to the fist charge
 
         Intent intent = new Intent(activity, PHMainActivity.class);
@@ -106,10 +116,6 @@ public class PayhereOTP implements ActivityResultListener {
         //Specific to RP
         IR.setRecurrence(Recurrence);       // Recurrence of the Subscription
         IR.setDuration(Duration);        // Duration of the Subscription
-
-        //IR.setNotifyUrl("https://slunicodes.com/");
-        //IR.setReturnUrl("https://slunicodes.com/");
-        //IR.setCancelUrl("https://slunicodes.com/");
 
         //
         IR.setOrderId(OrderID);        // Unique Reference ID
@@ -145,23 +151,26 @@ public class PayhereOTP implements ActivityResultListener {
         if (requestCode == 1100110011 && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) { //Checks if Intent has returned the correct data.
             PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT); //Get the PH Response
             if (response.isSuccess()){ //Checks if Payment is a Success
-                map.put("STATUS","SUCCESS"); //Status if Success
-                map.put("CODE","2"); //Status Code
-                map.put("SIGN", response.getData().getSign()); //Payment Sign Code
-                map.put("PAYMENT_NO",response.getData().getPaymentNo()); //Payment Code
+                map.put("\"STATUS\"","\"SUCCESS\""); //Status if Success
+                map.put("\"CODE\"","2"); //Status Code
+                map.put("\"SIGN\"", "\"" + response.getData().getSign() + "\""); //Payment Sign Code
+                map.put("\"PAYMENT_NO\"", "\"" + response.getData().getPaymentNo() + "\""); //Payment Code
+                map.put("\"MESSAGE\"","\"" + response.getData().getMessage() + "\"");
+                Log.d("TAG",map.toString());
                 pendingResult.success(map); //Puts Map to Result OBJ
                 channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
             } else { //If Payment Error Occurs
                 Log.d("TAG",response.toString());
-                map.put("STATUS","ERROR"); //Sets Status to Error
-                map.put("CODE","-1"); //Sets Error Code
+                map.put("\"STATUS\"","\"ERROR\""); //Sets Status to Error
+                map.put("\"CODE\"","-1"); //Sets Error Code
+                Log.d("TAG",map.toString());
                 pendingResult.success(map); //Puts Map to Result OBJ
                 channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
             }
             return true;
         } else {
-            map.put("STATUS","CANCELED"); //Sets Status to Cancel
-            map.put("CODE","0"); //Sets Cancel code
+            map.put("\"STATUS\"","\"CANCELED\""); //Sets Status to Cancel
+            map.put("\"CODE\"","0"); //Sets Cancel code
             pendingResult.success(map);  //Puts Map to Result OBJ
             channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
             return true;

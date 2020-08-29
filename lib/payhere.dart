@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/services.dart';
 
 class Payhere {
@@ -47,7 +46,7 @@ class OneTimePayment {
   String _deliveryAddress;
   String _deliveryCity;
   String _deliveryCountry;
-  int _quantity;
+  int _quantity = 1;
   String _mode = "SANDBOX";
 
   void setSandBoxMode() {
@@ -58,11 +57,11 @@ class OneTimePayment {
     this._mode = "PRODUCTION";
   }
 
-  OneTimePayment(
+  OneTimePayment({
     String merchantID,
     String merchantSecret,
     String currency,
-    double amount,
+    double totalamount,
     String orderID,
     String itemDesc,
     String cM1,
@@ -77,12 +76,12 @@ class OneTimePayment {
     String deliveryAddress,
     String deliveryCity,
     String deliveryCountry,
-    int quantity,
-  ) {
+    //int quantity,
+  }) {
     this._merchantID = merchantID;
     this._merchantSecret = merchantSecret;
     this._currency = currency;
-    this._amount = amount;
+    this._amount = totalamount;
     this._orderID = orderID;
     this._itemDesc = itemDesc;
     this._cM1 = cM1;
@@ -97,7 +96,7 @@ class OneTimePayment {
     this._deliveryAddress = deliveryAddress;
     this._deliveryCity = deliveryCity;
     this._deliveryCountry = deliveryCountry;
-    this._quantity = quantity;
+    //this._quantity = quantity;
   }
 
   Map toJson() => {

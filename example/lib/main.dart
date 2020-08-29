@@ -13,28 +13,30 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String response = "NOT YET";
 
-  OneTimePayment oneTimePayment = new OneTimePayment(
-      "Merchant ID",
-      "Merchant Secret",
-      "LKR",
-      250,
-      "12566548",
-      "itemDesc",
-      "cM1",
-      "cM2",
-      "fName",
-      "lName",
-      "email",
-      "+94771234567",
-      "address",
-      "Colombo",
-      "Sri Lanka",
-      "deliveryAddress",
-      "Colombo",
-      "Sri Lanka",
-      2);
+  Payhere payhere = new Payhere();
 
-        RecurringPayment recurringPayment = new RecurringPayment(
+  OneTimePayment otp = new OneTimePayment(
+      merchantID: "Merchant ID",
+      merchantSecret: "Merchant Secret",
+      currency: "LKR",
+      totalamount: 100,
+      orderID: "XTX",
+      itemDesc: "decribe thy item",
+      cM1: "CM1",
+      cM2: "CM2",
+      fName: "FName",
+      lName: "LName",
+      email: "Email",
+      phone: "Phone",
+      address: "Address",
+      city: "Colombo",
+      country: "Sri Lanka",
+      //these are optional values as stated in the payhere android sdk.
+      deliveryAddress: "deliveryAddress",
+      deliveryCity: "deliveryAddress",
+      deliveryCountry: "deliveryAddress");
+
+  RecurringPayment recurringPayment = new RecurringPayment(
       "Merchant ID",
       "Merchant Secret",
       "LKR",
@@ -54,9 +56,7 @@ class _MyAppState extends State<MyApp> {
       "Forever",
       2);
 
-
-
-  Payhere payhere = new Payhere();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +71,9 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               RaisedButton(
                 onPressed: () async {
-                  //String reps = await payhere.makeOneTimePayment(oneTimePayment);
-                  String reps = await payhere.makeRecurringPayment(recurringPayment);
+                  
+                  String reps = await payhere.makeOneTimePayment(otp);
+                  //String reps = await payhere.makeRecurringPayment(recurringPayment);
                   setState(() {
                     response = reps;
                   });
@@ -86,5 +87,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
 }
