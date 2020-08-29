@@ -30,6 +30,8 @@ Under dependencies in your pubspec.yaml file:
 
 Payhere Android SDK Dependencies are automatically handled by this plugin. 😜.
 
+**Your Apps Package Name (the applicationId from android/app/build.gradle) Must be Added to Payhere Account Prior**
+
 But, in your `AndroidManifest.xml`, under `application`, add this `tools:replace="android:label"`.  also, in the top section add `xmlns:tools="http://schemas.android.com/tools"`
 
 Example: 
