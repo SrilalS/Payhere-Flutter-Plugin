@@ -1,3 +1,7 @@
+## 0.7.5
+**Changes**
+* BUG FIX
+
 ## 0.7.25
 **Changes**
 * Completed the Documentaion for OneTimePayments

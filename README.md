@@ -3,7 +3,7 @@
 A Plugin for Payhere SDK for Flutter.
 
 
-![Build Version](https://img.shields.io/badge/V-0.7.25-brightgreen)
+![Build Version](https://img.shields.io/badge/V-0.7.5-brightgreen)
 ![Build](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![Build SDK](https://img.shields.io/badge/FlutterChannel-Stable-blue)
 ![Payheresdk](https://img.shields.io/badge/PayhereSDK-2.0.24-brightgreen)
@@ -21,7 +21,7 @@ A Plugin for Payhere SDK for Flutter.
 ### Installing
 Under dependencies in your pubspec.yaml file:
 
-    payhere: ^0.7.25
+    payhere: ^0.7.5
 
 # Documentation + How to Use
 (This is a subset of Payhere Android SDK Documentation. for more info please read [Payhere Android SDK Documentation](https://support.payhere.lk/api-&-mobile-sdk/payhere-android))
