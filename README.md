@@ -1,6 +1,6 @@
 # Payhere Flutter Plugin
 
-A Plugin for Payhere SDK for Flutter.
+A Plugin for Payhere SDK for Flutter. (Unofficial)
 
 
 ![Build Version](https://img.shields.io/badge/V-0.7.50-brightgreen)
