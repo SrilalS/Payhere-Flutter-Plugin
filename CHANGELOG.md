@@ -1,3 +1,9 @@
+## 0.8.50
+**Changes**
+* Payhere Version Bumped.
+* few bug fixes
+* Flutter Null-Safety Support
+
 ## 0.8.00
 **Changes**
 * version bump up with Payhere Native.
