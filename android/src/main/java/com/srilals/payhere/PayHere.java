@@ -16,19 +16,19 @@ import lk.payhere.androidsdk.PHResponse;
 import lk.payhere.androidsdk.model.InitRequest;
 import lk.payhere.androidsdk.model.StatusResponse;
 
-public class PayhereOTP implements ActivityResultListener {
+public class PayHere implements ActivityResultListener {
 
     private final Activity activity;
     private final MethodChannel channel;
     private Result pendingResult;
 
-    public PayhereOTP(Activity activity, MethodChannel channel) {
+    public PayHere(Activity activity, MethodChannel channel) {
         this.activity = activity;
         this.channel = channel;
     }
 
 
-    void oneTimePayment(Result result, String MID, String MSecret, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String DeliveryAddress, String DeliveryCity, String DeliveryCountry, int Quantity, String MODE) {
+    void oneTimePayment(Result result, String MID, String MSecret, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String DeliveryAddress, String DeliveryCity, String DeliveryCountry, String MODE) {
         this.pendingResult = result;
         InitRequest IR = new InitRequest();
         IR.setMerchantId(MID);
@@ -59,10 +59,6 @@ public class PayhereOTP implements ActivityResultListener {
             IR.getCustomer().getDeliveryAddress().setCountry(DeliveryCountry);
         }
 
-
-        //
-        //IR.getItems().add(new Item(null, ItemDesc, Quantity, Amount));
-
         Intent intent = new Intent(activity, PHMainActivity.class);
         intent.putExtra(PHConstants.INTENT_EXTRA_DATA, IR);
 
@@ -73,52 +69,21 @@ public class PayhereOTP implements ActivityResultListener {
         activity.startActivityForResult(intent, 1100110011);
     }
 
-    void recurringPaymentTest(Result result){
-        this.pendingResult = result;
-        InitRequest req = new InitRequest();
-
-        req.setMerchantId("XXXX");       // Your Merchant ID
-        req.setMerchantSecret("XXXX"); // Your Merchant Secret (Add your app at Settings > Domains & Credentials, to get this)
-        req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
-        req.setAmount(120.00);              // Final Amount to be charged
-        req.setRecurrence("1 Month");       // Recurrence of the Subscription
-        req.setDuration("Forever");         // Duration of the Subscription
-        req.setOrderId("testsub");        // Unique Reference ID
-        req.setCustom1("This is the custom message 1");
-        req.setCustom2("This is the custom message 2");
-        req.getCustomer().setFirstName("Saman");
-        req.getCustomer().setLastName("Perera");
-        req.getCustomer().setEmail("sampanp@gmail.com");
-        req.getCustomer().setPhone("+947771234567");
-        req.getCustomer().getAddress().setAddress("No.1, Galle Road");
-        req.getCustomer().getAddress().setCity("Colombo");
-        req.getCustomer().getAddress().setCountry("Sri Lanka");
-        req.setItemsDescription("PRO Plan Subscription");
-
-        // Optional Param
-        req.setStartupFee(0);               // +/- Adjustment to the fist charge
-
-        Intent intent = new Intent(activity, PHMainActivity.class);
-        intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);
-        PHConfigs.setBaseUrl(PHConfigs.SANDBOX_URL);
-        activity.startActivityForResult(intent, 1100110011);
-    }
-
     void recurringPayment(Result result, String MID, String MSecret, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String Recurrence, String Duration, double StartUpFee, String MODE){
         this.pendingResult = result;
 
         InitRequest IR = new InitRequest();
-        IR.setMerchantId(MID);       // Your Merchant ID
-        IR.setMerchantSecret(MSecret); // Your Merchant Secret (Add your app at Settings > Domains & Credentials, to get this)
-        IR.setCurrency(Currency);             // Currency code LKR/USD/GBP/EUR/AUD
-        IR.setAmount(Amount);              // Final Amount to be charged
+        IR.setMerchantId(MID);
+        IR.setMerchantSecret(MSecret);
+        IR.setCurrency(Currency);
+        IR.setAmount(Amount);
 
         //Specific to RP
-        IR.setRecurrence(Recurrence);       // Recurrence of the Subscription
-        IR.setDuration(Duration);        // Duration of the Subscription
+        IR.setRecurrence(Recurrence);
+        IR.setDuration(Duration);
 
         //
-        IR.setOrderId(OrderID);        // Unique Reference ID
+        IR.setOrderId(OrderID);
         IR.setCustom1(CM1);
         IR.setCustom2(CM2);
         IR.getCustomer().setFirstName(FName);

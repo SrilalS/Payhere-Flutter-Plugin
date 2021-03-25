@@ -18,7 +18,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
  */
 public class PayherePlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
 
-    private PayhereOTP payhereOTP;
+    private PayHere payhere;
     private ActivityPluginBinding pluginBinding;
     private MethodChannel channel;
 
@@ -36,23 +36,23 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-        if (call.method.equals("OTPPAY")) {
-            Log.d("TAG", "OTP PAY Call Received");
-            String MID = call.argument("MID").toString();
-            String MSecret = call.argument("MSecret").toString();
-            String Currency = call.argument("Currency").toString();
-            double Amount = Double.parseDouble(call.argument("Amount").toString());
-            String OrderID = call.argument("OrderID").toString();
-            String ItemDesc = call.argument("ItemDesc").toString();
-            String CM1 = call.argument("CM1").toString();
-            String CM2 = call.argument("CM2").toString();
-            String FName = call.argument("FName").toString();
-            String LName = call.argument("LName").toString();
-            String Email = call.argument("EMail").toString();
-            String Phone = call.argument("Phone").toString();
-            String Address = call.argument("Address").toString();
-            String City = call.argument("City").toString();
-            String Country = call.argument("Country").toString();
+        if (call.method.equals("OTPPAY")) { //Stable and Working 2.0.32
+            Log.d("TAG", "Starting PayHere One-Time Payment");
+            String MID = call.argument("MID");
+            String MSecret = call.argument("MSecret");
+            String Currency = call.argument("Currency");
+            double Amount = call.argument("Amount");
+            String OrderID = call.argument("OrderID");
+            String ItemDesc = call.argument("ItemDesc");
+            String CM1 = call.argument("CM1");
+            String CM2 = call.argument("CM2");
+            String FName = call.argument("FName");
+            String LName = call.argument("LName");
+            String Email = call.argument("EMail");
+            String Phone = call.argument("Phone");
+            String Address = call.argument("Address");
+            String City = call.argument("City");
+            String Country = call.argument("Country");
             //Nullables
             String DeliveryAddressIN = call.argument("DeliveryAddress");
             String DeliveryCityIN = call.argument("DeliveryCity");
@@ -63,22 +63,20 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
             String DeliveryCountry = null;
 
             if (DeliveryAddressIN != null) {
-                DeliveryAddress = DeliveryAddressIN.toString();
+                DeliveryAddress = DeliveryAddressIN;
             }
 
             if (DeliveryCityIN != null) {
-                DeliveryCity = DeliveryCityIN.toString();
+                DeliveryCity = DeliveryCityIN;
             }
 
             if (DeliveryCountryIN != null) {
-                DeliveryCountry = DeliveryCountryIN.toString();
+                DeliveryCountry = DeliveryCountryIN;
             }
 
-            //
-            int Quantity = Integer.parseInt(call.argument("Quantity").toString());
-            String MODE = call.argument("MODE").toString();
+            String MODE = call.argument("MODE");
 
-            payhereOTP.oneTimePayment(result, MID, MSecret, Currency, Amount, OrderID, ItemDesc, CM1, CM2, FName, LName, Email, Phone, Address, City, Country, DeliveryAddress, DeliveryCity, DeliveryCountry, Quantity, MODE);
+            payhere.oneTimePayment(result, MID, MSecret, Currency, Amount, OrderID, ItemDesc, CM1, CM2, FName, LName, Email, Phone, Address, City, Country, DeliveryAddress, DeliveryCity, DeliveryCountry, MODE);
 
         } else if (call.method.equals("RPPAY")) {
             Log.d("TAG", "RP PAY Call Received");
@@ -106,8 +104,8 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
 
             String MODE = call.argument("MODE").toString();
 
-            //payhereOTP.recurringPayment(result);
-            payhereOTP.recurringPayment(result, MID, MSecret, Currency, Amount, OrderID, ItemDesc, CM1, CM2, FName, LName, Email, Phone, Address, City, Country, Recurrence, Duration, StartUpFee, MODE);
+            //payhereOTP.recurringPaymentTest(result);
+            payhere.recurringPayment(result, MID, MSecret, Currency, Amount, OrderID, ItemDesc, CM1, CM2, FName, LName, Email, Phone, Address, City, Country, Recurrence, Duration, StartUpFee, MODE);
         } else {
             result.notImplemented();
         }
@@ -119,9 +117,9 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
 
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
-        this.payhereOTP = new PayhereOTP(binding.getActivity(), channel);
+        this.payhere = new PayHere(binding.getActivity(), channel);
         this.pluginBinding = binding;
-        binding.addActivityResultListener(payhereOTP);
+        binding.addActivityResultListener(payhere);
     }
 
     @Override
@@ -136,7 +134,7 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
 
     @Override
     public void onDetachedFromActivity() {
-        pluginBinding.removeActivityResultListener(payhereOTP);
+        pluginBinding.removeActivityResultListener(payhere);
         pluginBinding = null;
     }
 

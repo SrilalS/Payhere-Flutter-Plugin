@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:payhere/payhere.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(PayhereExample());
 }
 
-class MyApp extends StatefulWidget {
+class PayhereExample extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _PayhereExampleState createState() => _PayhereExampleState();
 }
 
-class _MyAppState extends State<MyApp> {
-  String response = "NOT YET";
+class _PayhereExampleState extends State<PayhereExample> {
+  String response = "Click the Above Button";
 
   Payhere payhere = new Payhere();
-
-  OneTimePayment otp = new OneTimePayment(
-      merchantID: "Merchant ID",
-      merchantSecret: "Merchant Secret",
+  OneTimePayment oneTimePayment = new OneTimePayment(
+      merchantID: "1213586",
+      merchantSecret: "48WrQKBwKts4PbEy5gCd878QfqpdU2Zzl4PbG9xxs3d8",
       currency: "LKR",
       totalamount: 100,
       orderID: "XTX",
@@ -35,7 +34,6 @@ class _MyAppState extends State<MyApp> {
       deliveryAddress: "deliveryAddress",
       deliveryCity: "deliveryAddress",
       deliveryCountry: "deliveryAddress");
-
   RecurringPayment recurringPayment = new RecurringPayment(
       "Merchant ID",
       "Merchant Secret",
@@ -56,8 +54,6 @@ class _MyAppState extends State<MyApp> {
       "Forever",
       2);
 
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -69,11 +65,14 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
-                  
-                  String reps = await payhere.makeOneTimePayment(otp);
-                  //String reps = await payhere.makeRecurringPayment(recurringPayment);
+
+                  String reps = await payhere.makeOneTimePayment(
+                      oneTimePayment,
+                      notifyurl: 'localhost',
+                      returnurl: 'localhost',
+                      cancelnurl: 'localhost');
                   setState(() {
                     response = reps;
                   });
