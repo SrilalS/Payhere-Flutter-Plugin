@@ -1,3 +1,9 @@
+## 0.8.00
+**Changes**
+* version bump up with Payhere Native.
+* few bug fixes
+* flutter 2.0 compatible
+
 ## 0.7.50
 **Changes**
 * version miss match fixed
