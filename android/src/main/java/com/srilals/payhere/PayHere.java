@@ -28,11 +28,13 @@ public class PayHere implements ActivityResultListener {
     }
 
 
-    void oneTimePayment(Result result, String MID, String MSecret, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String DeliveryAddress, String DeliveryCity, String DeliveryCountry, String MODE) {
+    void oneTimePayment(Result result, String MID, String MSecret, String NotifyUrl, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String DeliveryAddress, String DeliveryCity, String DeliveryCountry, String MODE) {
         this.pendingResult = result;
         InitRequest IR = new InitRequest();
         IR.setMerchantId(MID);
         IR.setMerchantSecret(MSecret);
+        IR.setNotifyUrl(NotifyUrl);
+
         IR.setCurrency(Currency);
         IR.setAmount(Amount);
         IR.setOrderId(OrderID);
@@ -69,12 +71,14 @@ public class PayHere implements ActivityResultListener {
         activity.startActivityForResult(intent, 1100110011);
     }
 
-    void recurringPayment(Result result, String MID, String MSecret, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String Recurrence, String Duration, double StartUpFee, String MODE){
+    void recurringPayment(Result result, String MID, String MSecret, String NotifyUrl, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String Recurrence, String Duration, double StartUpFee, String MODE){
         this.pendingResult = result;
 
         InitRequest IR = new InitRequest();
         IR.setMerchantId(MID);
         IR.setMerchantSecret(MSecret);
+        IR.setNotifyUrl(NotifyUrl);
+
         IR.setCurrency(Currency);
         IR.setAmount(Amount);
 
@@ -115,23 +119,22 @@ public class PayHere implements ActivityResultListener {
         HashMap<String, Object> map = new HashMap<>();
         if (requestCode == 1100110011 && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) { //Checks if Intent has returned the correct data.
             PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT); //Get the PH Response
+            //Calls the Platform Method Channel for Send back The Status
+            //Puts Map to Result OBJ
             if (response.isSuccess()){ //Checks if Payment is a Success
                 map.put("\"STATUS\"","\"SUCCESS\""); //Status if Success
                 map.put("\"CODE\"","2"); //Status Code
                 map.put("\"SIGN\"", "\"" + response.getData().getSign() + "\""); //Payment Sign Code
                 map.put("\"PAYMENT_NO\"", "\"" + response.getData().getPaymentNo() + "\""); //Payment Code
                 map.put("\"MESSAGE\"","\"" + response.getData().getMessage() + "\"");
-                Log.d("TAG",map.toString());
-                pendingResult.success(map); //Puts Map to Result OBJ
-                channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
             } else { //If Payment Error Occurs
                 Log.d("TAG",response.toString());
                 map.put("\"STATUS\"","\"ERROR\""); //Sets Status to Error
                 map.put("\"CODE\"","-1"); //Sets Error Code
-                Log.d("TAG",map.toString());
-                pendingResult.success(map); //Puts Map to Result OBJ
-                channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
             }
+            Log.d("TAG",map.toString());
+            pendingResult.success(map); //Puts Map to Result OBJ
+            channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
             return true;
         } else {
             map.put("\"STATUS\"","\"CANCELED\""); //Sets Status to Cancel

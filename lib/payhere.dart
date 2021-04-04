@@ -1,26 +1,30 @@
 import 'dart:async';
+
 import 'package:flutter/services.dart';
 
 class Payhere {
-
-  static const pF = const MethodChannel('Payhere');
+  /// Declare method channel
+  static const pF = MethodChannel('Payhere');
   String result = "FAILURE";
 
+  // OneTimePayemnt function. this will return response String.
   Future<String> makeOneTimePayment(OneTimePayment oneTimePayment,
       {String? returnurl, String? cancelnurl, String? notifyurl}) async {
-      await pF.invokeMethod("OTPPAY", oneTimePayment.toJson());
-      await waitForResponse();
-      return result;
+    await pF.invokeMethod("OTPPAY", oneTimePayment.toJson());
+    await waitForResponse();
+    return result;
   }
 
+  // RecurringPayemnt function. this will return response String.
   Future<String> makeRecurringPayment(RecurringPayment recurringPayment) async {
-      await pF.invokeMethod("RPPAY", recurringPayment.toJson());
-      await waitForResponse();
-      return result;
+    await pF.invokeMethod("RPPAY", recurringPayment.toJson());
+    await waitForResponse();
+    return result;
   }
 
+  // This will wait for the response from Payhere.
   Future waitForResponse() {
-    Completer completer = new Completer();
+    Completer completer = Completer();
     pF.setMethodCallHandler((call) async {
       result = call.arguments.toString();
       completer.complete();
@@ -29,9 +33,16 @@ class Payhere {
   }
 }
 
+// Main OneTimePayment Class
 class OneTimePayment {
+  /// Put the Merchant ID here.
   String? merchantID;
+
+  /// Put the Merchant secret here.
   String? merchantSecret;
+
+  /// You can't test the nofify url on local host. you WILL need a server on the web.
+  String? notifyUrl;
   String? currency;
   double? amount;
   String? orderID;
@@ -48,19 +59,25 @@ class OneTimePayment {
   String? deliveryAddress;
   String? deliveryCity;
   String? deliveryCountry;
+
+  /// By default payment mode is in Sandbox mode.
   String mode = "SANDBOX";
 
+  // Set the payement mode to Sandbox Mode
   void setSandBoxMode() {
     this.mode = "SANDBOX";
   }
 
+  // Set the payement mode to Production Mode Mode
   void setProductionMode() {
     this.mode = "PRODUCTION";
   }
 
+  /// OTP Object Creation.
   OneTimePayment({
     String? merchantID,
     String? merchantSecret,
+    String? notifyUrl,
     String? currency,
     double? totalamount,
     String? orderID,
@@ -80,6 +97,7 @@ class OneTimePayment {
   }) {
     this.merchantID = merchantID;
     this.merchantSecret = merchantSecret;
+    this.notifyUrl = notifyUrl;
     this.currency = currency;
     this.amount = totalamount;
     this.orderID = orderID;
@@ -98,9 +116,11 @@ class OneTimePayment {
     this.deliveryCountry = deliveryCountry;
   }
 
+  /// Convert the pyament object to json.
   Map toJson() => {
         "MID": this.merchantID,
         "MSecret": this.merchantSecret,
+        "NotifyUrl": this.notifyUrl,
         "Currency": this.currency,
         "Amount": this.amount,
         "OrderID": this.orderID,
@@ -121,9 +141,18 @@ class OneTimePayment {
       };
 }
 
+// Main OneTimePayment Class
 class RecurringPayment {
+  /// Puts the Merchant ID here.
   String? _merchantID;
+
+  /// Puts the Merchant secret here
   String? _merchantSecret;
+
+  /// You can't test the nofify url on local host. you WILL need a server on the web.
+  String? _notifyUrl;
+
+  /// Currency Type ex: LKR, USD ...
   String? _currency;
   double? _amount;
   String? _orderID;
@@ -142,19 +171,24 @@ class RecurringPayment {
   String? _duration;
   double? _startUpFee;
 
+  /// By default payment mode is in Sandbox mode.
   String _mode = "SANDBOX";
 
+  // Set the payement mode to Sandbox Mode
   void setSandBoxMode() {
     this._mode = "SANDBOX";
   }
 
+  // Set the payement mode to Production Mode
   void setProductionMode() {
     this._mode = "PRODUCTION";
   }
 
+  /// RP Object is Created.
   RecurringPayment(
       String merchantID,
       String merchantSecret,
+      String notifyUrl,
       String currency,
       double amount,
       String orderID,
@@ -173,6 +207,7 @@ class RecurringPayment {
       double startUpFee) {
     this._merchantID = merchantID;
     this._merchantSecret = merchantSecret;
+    this._notifyUrl = notifyUrl;
     this._currency = currency;
     this._amount = amount;
     this._orderID = orderID;
@@ -191,9 +226,11 @@ class RecurringPayment {
     this._startUpFee = startUpFee;
   }
 
+  /// Convert the RP Object to JSON.
   Map toJson() => {
         "MID": this._merchantID,
         "MSecret": this._merchantSecret,
+        "NotifyUrl": this._notifyUrl,
         "Currency": this._currency,
         "Amount": this._amount,
         "OrderID": this._orderID,

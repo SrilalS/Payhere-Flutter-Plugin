@@ -3,7 +3,7 @@
 A Plugin for Payhere SDK for Flutter. (Unofficial)
 
 
-![Build Version](https://img.shields.io/badge/V-0.8.50-brightgreen)
+![Build Version](https://img.shields.io/badge/V-0.9.00-brightgreen)
 ![Build](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![Build SDK](https://img.shields.io/badge/FlutterChannel-Stable-blue)
 ![Payheresdk](https://img.shields.io/badge/PayhereSDK-2.0.32-brightgreen)
@@ -22,7 +22,7 @@ A Plugin for Payhere SDK for Flutter. (Unofficial)
 ### Installing
 Under dependencies in your pubspec.yaml file:
 
-    payhere: ^0.8.50
+    payhere: ^0.9.00
 
 # Documentation + How to Use
 (This is a subset of Payhere Android SDK Documentation. for more info please read [Payhere Android SDK Documentation](https://support.payhere.lk/api-&-mobile-sdk/payhere-android))
@@ -63,6 +63,7 @@ first make a new **OneTimePayment** object. this uses Named Parameters to avoid 
 OneTimePayment otp = new  OneTimePayment(
 	merchantID: "Your Merchant ID",
 	merchantSecret: "Your Merchant Secret",
+	notifyUrl: "http://example.com/",
 	currency: "LKR", //Currency code LKR/USD/GBP/EUR/AUD
 	totalamount: 100, // Final Amount to be charged.
 	orderID: "UniqueOrderID", // Unique Reference ID

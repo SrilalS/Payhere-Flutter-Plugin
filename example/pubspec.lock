@@ -106,7 +106,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.8.00"
+    version: "0.8.50"
   sky_engine:
     dependency: transitive
     description: flutter

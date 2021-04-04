@@ -11,12 +11,15 @@ class PayhereExample extends StatefulWidget {
 }
 
 class _PayhereExampleState extends State<PayhereExample> {
+
+  //The default Response
   String response = "Click the Above Button";
 
   Payhere payhere = new Payhere();
   OneTimePayment oneTimePayment = new OneTimePayment(
       merchantID: "1213586",
       merchantSecret: "48WrQKBwKts4PbEy5gCd878QfqpdU2Zzl4PbG9xxs3d8",
+      notifyUrl: "http://example.com/",
       currency: "LKR",
       totalamount: 100,
       orderID: "XTX",
@@ -30,13 +33,14 @@ class _PayhereExampleState extends State<PayhereExample> {
       address: "Address",
       city: "Colombo",
       country: "Sri Lanka",
-      //these are optional values as stated in the payhere android sdk.
+      //these are optional values as stated in the PayHere android sdk.
       deliveryAddress: "deliveryAddress",
       deliveryCity: "deliveryAddress",
       deliveryCountry: "deliveryAddress");
   RecurringPayment recurringPayment = new RecurringPayment(
       "Merchant ID",
       "Merchant Secret",
+      "http://example.com/",
       "LKR",
       120,
       "o6ae978a1",

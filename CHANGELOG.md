@@ -1,3 +1,9 @@
+## 0.9.00
+**Changes**
+* Added Missing Properties.
+* few bug fixes.
+* Flutter Full Fledge Null-Safety Support
+
 ## 0.8.50
 **Changes**
 * Payhere Version Bumped.
