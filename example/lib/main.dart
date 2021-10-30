@@ -22,7 +22,7 @@ class _PayhereExampleState extends State<PayhereExample> {
       notifyUrl: "http://example.com/",
       currency: "LKR",
       totalamount: 100,
-      orderID: "XTX",
+      orderID: "SomeOrderID",
       itemDesc: "decribe thy item",
       cM1: "CM1",
       cM2: "CM2",
@@ -71,12 +71,7 @@ class _PayhereExampleState extends State<PayhereExample> {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () async {
-
-                  String reps = await payhere.makeOneTimePayment(
-                      oneTimePayment,
-                      notifyurl: 'localhost',
-                      returnurl: 'localhost',
-                      cancelnurl: 'localhost');
+                  String reps = await payhere.makeOneTimePayment(oneTimePayment);
                   setState(() {
                     response = reps;
                   });

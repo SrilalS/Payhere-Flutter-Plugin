@@ -7,7 +7,7 @@ class Payhere {
   static const pF = MethodChannel('Payhere');
   String result = "FAILURE";
 
-  // OneTimePayemnt function. this will return response String.
+  /// OneTimePayemnt function. this will return response String.
   Future<String> makeOneTimePayment(OneTimePayment oneTimePayment,
       {String? returnurl, String? cancelnurl, String? notifyurl}) async {
     await pF.invokeMethod("OTPPAY", oneTimePayment.toJson());
@@ -15,14 +15,14 @@ class Payhere {
     return result;
   }
 
-  // RecurringPayemnt function. this will return response String.
+  /// RecurringPayemnt function. this will return response String.
   Future<String> makeRecurringPayment(RecurringPayment recurringPayment) async {
     await pF.invokeMethod("RPPAY", recurringPayment.toJson());
     await waitForResponse();
     return result;
   }
 
-  // This will wait for the response from Payhere.
+  /// This will wait for the response from Payhere native sdk.
   Future waitForResponse() {
     Completer completer = Completer();
     pF.setMethodCallHandler((call) async {
@@ -33,7 +33,7 @@ class Payhere {
   }
 }
 
-// Main OneTimePayment Class
+/// Main OneTimePayment Class
 class OneTimePayment {
   /// Put the Merchant ID here.
   String? merchantID;
@@ -56,6 +56,8 @@ class OneTimePayment {
   String? address;
   String? city;
   String? country;
+
+  /// Optional Parameters as stated in Payhere Documentation.
   String? deliveryAddress;
   String? deliveryCity;
   String? deliveryCountry;
@@ -141,7 +143,8 @@ class OneTimePayment {
       };
 }
 
-// Main OneTimePayment Class
+/// Main OneTimePayment Class.
+/// Cannot test this as the sandbx isn't allowing to use Recurring Payments.
 class RecurringPayment {
   /// Puts the Merchant ID here.
   String? _merchantID;

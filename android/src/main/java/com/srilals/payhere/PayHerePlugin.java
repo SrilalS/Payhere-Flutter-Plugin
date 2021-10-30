@@ -18,7 +18,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
  * Based on Payhere Android Payhere SDK
  * ! MARS FIRST !
  */
-public class PayherePlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
+public class PayHerePlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private PayHere payhere;
     private ActivityPluginBinding pluginBinding;
@@ -111,7 +111,6 @@ public class PayherePlugin implements FlutterPlugin, MethodCallHandler, Activity
 
             String MODE = call.argument("MODE").toString();
 
-            //payhereOTP.recurringPaymentTest(result);
             payhere.recurringPayment(result, MID, MSecret, NotifyUrl, Currency, Amount, OrderID, ItemDesc, CM1, CM2, FName, LName, Email, Phone, Address, City, Country, Recurrence, Duration, StartUpFee, MODE);
         } else {
             result.notImplemented();

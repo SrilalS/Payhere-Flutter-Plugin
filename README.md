@@ -3,10 +3,10 @@
 A Plugin for Payhere SDK for Flutter. (Unofficial)
 
 
-![Build Version](https://img.shields.io/badge/V-0.9.00-brightgreen)
+![Build Version](https://img.shields.io/badge/V-0.9.50-brightgreen)
 ![Build](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![Build SDK](https://img.shields.io/badge/FlutterChannel-Stable-blue)
-![Payheresdk](https://img.shields.io/badge/PayhereSDK-2.0.32-brightgreen)
+![Payheresdk](https://img.shields.io/badge/PayhereSDK-2.0.37-brightgreen)
 ![NullSafety](https://img.shields.io/badge/NullSafety-NullSafe-blue)
 
 
@@ -22,7 +22,7 @@ A Plugin for Payhere SDK for Flutter. (Unofficial)
 ### Installing
 Under dependencies in your pubspec.yaml file:
 
-    payhere: ^0.9.00
+    payhere: ^0.9.50
 
 # Documentation + How to Use
 (This is a subset of Payhere Android SDK Documentation. for more info please read [Payhere Android SDK Documentation](https://support.payhere.lk/api-&-mobile-sdk/payhere-android))
@@ -106,23 +106,26 @@ the resulting JSON String will have 3 modes.
  ```
  2. IF the Payment encountered an Error
  ```
-  {"STATUS":"ERROR", "CODE":-1}
+  {"STATUS":"ERROR", "CODE":<ERROR CODE> , "ERROR": <ERROR DATA>}
   ```
  3. IF the Payment is Canceled.
  ```
- {"STATUS":"CANCELED", "CODE":0} 
+ {"STATUS":"CANCELED", "CODE":-6} 
  ```
- **Due to the Nature of the Payhere Android SDK, the Cancel and Error Status are interchagable. meaning, one can mean the other.**
-
 ## Payment Status/Result
 
 | Code| Reason|
 |--|--|
+| 1|  Success|
 | 2|  Success|
 | -1|  Error|
-| 0|  Canceled|
+| -6|  Canceled|
+| -5|  Canceled|
 
-**Error (-1) and Canceled (0) are Same in Behavior.**
+**Success (1) and Success (2) are returned by the SDK in the same event.**
+**Canceled (-6) returned when canceled on Payment type selection UI**
+**Canceled (-5) returned when canceled after Payment type selection UI**
+
 
 ## Dev STATUS
 | Platform| OneTime Payment| Recurring Payment | Pre-approval Payment

@@ -1,3 +1,9 @@
+## 0.9.50
+**Changes**
+* Fixed many bugs related to SDK
+* Added Error and Crash prevention methods.
+* Upgraded PayHere SDK to 2.0.37
+
 ## 0.9.00
 **Changes**
 * Added Missing Properties.

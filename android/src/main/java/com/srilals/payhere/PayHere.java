@@ -18,9 +18,11 @@ import lk.payhere.androidsdk.model.StatusResponse;
 
 public class PayHere implements ActivityResultListener {
 
+
     private final Activity activity;
     private final MethodChannel channel;
     private Result pendingResult;
+    private final int rCode = 11011011;
 
     public PayHere(Activity activity, MethodChannel channel) {
         this.activity = activity;
@@ -68,7 +70,7 @@ public class PayHere implements ActivityResultListener {
         if (MODE.equals("PRODUCTION")){
             PHConfigs.setBaseUrl(PHConfigs.LIVE_URL);
         }
-        activity.startActivityForResult(intent, 1100110011);
+        activity.startActivityForResult(intent, this.rCode);
     }
 
     void recurringPayment(Result result, String MID, String MSecret, String NotifyUrl, String Currency, double Amount, String OrderID, String ItemDesc, String CM1, String CM2, String FName, String LName, String Email, String Phone, String Address, String City, String Country, String Recurrence, String Duration, double StartUpFee, String MODE){
@@ -110,39 +112,45 @@ public class PayHere implements ActivityResultListener {
         if (MODE.equals("PRODUCTION")){
             PHConfigs.setBaseUrl(PHConfigs.LIVE_URL);
         }
-        activity.startActivityForResult(intent, 1100110011);
+        activity.startActivityForResult(intent, this.rCode);
     }
 
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        HashMap<String, Object> map = new HashMap<>();
-        if (requestCode == 1100110011 && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) { //Checks if Intent has returned the correct data.
+        HashMap<String, Object> map = new HashMap<>(); //Calls the Platform Method Channel for Send back The Status
+        if (requestCode == this.rCode && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) { //Checks if Intent has returned the correct data.
             PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT); //Get the PH Response
-            //Calls the Platform Method Channel for Send back The Status
-            //Puts Map to Result OBJ
-            if (response.isSuccess()){ //Checks if Payment is a Success
-                map.put("\"STATUS\"","\"SUCCESS\""); //Status if Success
-                map.put("\"CODE\"","2"); //Status Code
-                map.put("\"SIGN\"", "\"" + response.getData().getSign() + "\""); //Payment Sign Code
-                map.put("\"PAYMENT_NO\"", "\"" + response.getData().getPaymentNo() + "\""); //Payment Code
-                map.put("\"MESSAGE\"","\"" + response.getData().getMessage() + "\"");
+            Log.d("PHRES",response.toString());
+            Log.d("PHRES", String.valueOf(response.getStatus()));
+            if (response.getStatus() == 1){ //Checks if Payment is a Success
+                map.put("STATUS","SUCCESS"); //Status if Success
+                map.put("CODE",response.getStatus()); //Status Code
+                map.put("SIGN", response.getData().getSign()); //Payment Sign Code
+                map.put("PAYMENT_NO", response.getData().getPaymentNo()); //Payment Code
+                map.put("MESSAGE", response.getData().getMessage());
+                map.put("RAW", response.toString()); //Raw Response from PayHere
+            } else if (response.getStatus() == -6){ // If Payment is canceled by user.
+                Log.d("TAG",response.toString());
+                map.put("STATUS","CANCELED"); //Sets Status to Error
+                map.put("CODE", response.getStatus());
+                map.put("MESSAGE","User canceled the request"); //Sets Error Code
+                map.put("RAW", response.toString()); //Raw Response from PayHere
             } else { //If Payment Error Occurs
                 Log.d("TAG",response.toString());
-                map.put("\"STATUS\"","\"ERROR\""); //Sets Status to Error
-                map.put("\"CODE\"","-1"); //Sets Error Code
+                map.put("STATUS","ERROR"); //Sets Status to Error
+                map.put("CODE", response.getStatus()); //Sets Error Code
+                map.put("MESSAGE",response.getData().getMessage()); //Sets Error Data
+                map.put("RAW", response.toString()); //Raw Response from PayHere
             }
-            Log.d("TAG",map.toString());
-            pendingResult.success(map); //Puts Map to Result OBJ
-            channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
-            return true;
         } else {
-            map.put("\"STATUS\"","\"CANCELED\""); //Sets Status to Cancel
-            map.put("\"CODE\"","0"); //Sets Cancel code
-            pendingResult.success(map);  //Puts Map to Result OBJ
-            channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
-            return true;
+            map.put("STATUS","CANCELED"); //Sets Status to Cancel
+            map.put("CODE",-6); //Sets Cancel code
+            map.put("MESSAGE", "User canceled the request");
         }
+        pendingResult.success(map); //Puts Map to Result OBJ
+        channel.invokeMethod("Result",map); //Calls the Platform Method Channel for Send back The Status
+        return true;
     }
 
 }
